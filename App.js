@@ -1,25 +1,20 @@
 import React from 'react';
 import {SafeAreaView, View, Text, StatusBar, StyleSheet} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 import {palette} from './theme';
+import WelcomeRouter from './src/routes/WelcomeRouter';
 
 const App = () => {
   return (
-    <>
+    <NavigationContainer>
       <StatusBar
         barStyle="light-content"
         backgroundColor={palette.backgroundDark}
       />
       <SafeAreaView style={styles.main}>
-        <Text
-          style={{
-            color: '#fff',
-            fontFamily: 'Poppins-SemiBold',
-            fontSize: 20,
-          }}>
-          Lorem Ipsum Dolor Amet
-        </Text>
+        <WelcomeRouter />
       </SafeAreaView>
-    </>
+    </NavigationContainer>
   );
 };
 

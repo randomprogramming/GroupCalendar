@@ -8,5 +8,7 @@ export const palette = {
 };
 
 export const pxGenerator = function (multiplier) {
-  return `${multiplier * BASE_SIZE}px`;
+  if (typeof multiplier !== 'number') return 0;
+
+  return multiplier * BASE_SIZE;
 };
