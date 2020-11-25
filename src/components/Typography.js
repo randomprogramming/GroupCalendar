@@ -7,6 +7,7 @@ const Typography = ({
   fontWeight = 500,
   darkText = false,
   variant,
+  onPress,
   children,
 }) => {
   const getTextStyle = () => {
@@ -22,24 +23,29 @@ const Typography = ({
     if (variant) {
       switch (variant) {
         case 'h1':
-          tmpStyle.push(tmpStyle.push(styles.bold));
-          tmpStyle.push(tmpStyle.push(styles.h1));
+          tmpStyle.push(styles.bold);
+          tmpStyle.push(styles.h1);
           break;
         case 'h2':
-          tmpStyle.push(tmpStyle.push(styles.bold));
-          tmpStyle.push(tmpStyle.push(styles.h2));
+          tmpStyle.push(styles.bold);
+          tmpStyle.push(styles.h2);
           break;
         case 'h3':
-          tmpStyle.push(tmpStyle.push(styles.semiBold));
-          tmpStyle.push(tmpStyle.push(styles.h3));
+          tmpStyle.push(styles.semiBold);
+          tmpStyle.push(styles.h3);
           break;
         case 'h4':
-          tmpStyle.push(tmpStyle.push(styles.semiBold));
-          tmpStyle.push(tmpStyle.push(styles.h4));
+          tmpStyle.push(styles.semiBold);
+          tmpStyle.push(styles.h4);
+          break;
+        case 'accent':
+          tmpStyle.push(styles.accent);
+          tmpStyle.push(styles.medium);
           break;
         case 'title':
-          tmpStyle.push(tmpStyle.push(styles.semiBold));
-          tmpStyle.push(tmpStyle.push(styles.title));
+          tmpStyle.push(styles.semiBold);
+          tmpStyle.push(styles.title);
+          break;
         default:
           tmpStyle.push(styles.medium);
       }
@@ -71,7 +77,11 @@ const Typography = ({
     return tmpStyle;
   };
 
-  return <Text style={getTextStyle()}>{children}</Text>;
+  return (
+    <Text style={getTextStyle()} onPress={onPress}>
+      {children}
+    </Text>
+  );
 };
 
 export default Typography;
@@ -83,6 +93,7 @@ const styles = StyleSheet.create({
   darkText: {
     color: palette.backgroundDark,
   },
+  accent: {color: palette.accent},
   regular: {
     // 0 <= x <= 400
     fontFamily: 'Poppins-Regular',

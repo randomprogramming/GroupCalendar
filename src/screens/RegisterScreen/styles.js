@@ -1,5 +1,14 @@
+import {StyleSheet} from 'react-native';
+import {palette, pxGenerator} from '../../../theme';
+
 export default StyleSheet.create({
-  flex: {
+  main: {
     flex: 1,
+    backgroundColor: palette.backgroundDark,
+    paddingHorizontal: pxGenerator(5),
+    paddingVertical: pxGenerator(5),
+  },
+  linkContainer: {
+    flexDirection: 'row',
   },
 });

@@ -2,8 +2,9 @@ const BASE_SIZE = 4;
 
 export const palette = {
   backgroundDark: '#191720',
+  backgroundGray: '#1e1c24',
   white: '#fff',
-  darkAccent: '#03b591',
+  accent: '#03b591',
   grayAccent: '#5c5b66',
 };
 

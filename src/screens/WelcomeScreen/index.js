@@ -4,8 +4,9 @@ import CustomButton from '../../components/CustomButton';
 import Typography from '../../components/Typography';
 import styles from './styles';
 import Logo from '../../../static/images/logo.png';
+import {REGISTER} from '../../routes/WelcomeRouterNames';
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({navigation}) => {
   return (
     <View style={styles.main}>
       <View style={styles.flex}>
@@ -14,7 +15,10 @@ const WelcomeScreen = () => {
       </View>
       <View>
         <CustomButton title="Sign In" />
-        <CustomButton title="Register" />
+        <CustomButton
+          title="Register"
+          onPress={() => navigation.navigate(REGISTER)}
+        />
       </View>
     </View>
   );
