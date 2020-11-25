@@ -15,18 +15,20 @@ const RegisterScreen = ({navigation}) => {
         You will need an account to connect with Your colleagues or classmates
         and share calendars.
       </Typography>
-      <CustomTextInput placeholder="First Name" autoCapitalize="words" />
-      <CustomTextInput placeholder="Last Name" autoCapitalize="words" />
-      <CustomTextInput
-        placeholder="Email Name"
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-      {/* TODO: Fix this font here
+      <View style={styles.textFieldsContainer}>
+        <CustomTextInput placeholder="First Name" autoCapitalize="words" />
+        <CustomTextInput placeholder="Last Name" autoCapitalize="words" />
+        <CustomTextInput
+          placeholder="Email Name"
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+        {/* TODO: Fix this font here
       When secureTextEntry is true, the font defaults to Roboto
       Fix: Conditionally change the font if the field is empty or not */}
-      <CustomTextInput placeholder="Password" secureTextEntry />
-      <CustomTextInput placeholder="Confirm Password" secureTextEntry />
+        <CustomTextInput placeholder="Password" secureTextEntry />
+        <CustomTextInput placeholder="Confirm Password" secureTextEntry />
+      </View>
 
       <View style={styles.linkContainer}>
         <Typography>Already have an account? </Typography>

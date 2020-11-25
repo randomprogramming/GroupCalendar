@@ -11,4 +11,8 @@ export default StyleSheet.create({
   linkContainer: {
     flexDirection: 'row',
   },
+  textFieldsContainer: {
+    flex: 1,
+    justifyContent: 'space-evenly',
+  },
 });
