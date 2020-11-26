@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, View, Text, StatusBar, StyleSheet} from 'react-native';
+import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {palette} from './theme';
 import WelcomeRouter from './src/routes/WelcomeRouter';
