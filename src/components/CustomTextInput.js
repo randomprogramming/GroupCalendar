@@ -12,6 +12,7 @@ const CustomTextInput = ({
   keyboardType,
   autoCapitalize,
   autoCorrect,
+  marginTop,
 }) => {
   let ref = React.useRef();
 
@@ -26,7 +27,11 @@ const CustomTextInput = ({
   return (
     <TextInput
       ref={ref}
-      style={styles.main}
+      style={
+        marginTop
+          ? [styles.main, {marginTop: pxGenerator(marginTop)}]
+          : styles.main
+      }
       value={value}
       onChangeText={(e) => onChange(e)}
       placeholder={placeholder}
