@@ -80,7 +80,9 @@ const RegisterScreen = ({navigation}) => {
 
           <View style={styles.linkContainer}>
             <Typography>Already have an account? </Typography>
-            <Link onPress={() => console.log('dsa')}>Log in here</Link>
+            <Link onPress={() => navigation.navigate(SIGN_IN)}>
+              Log in here
+            </Link>
           </View>
 
           <CustomButton
