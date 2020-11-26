@@ -1,17 +1,34 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {TextInput, StyleSheet} from 'react-native';
 import {palette, pxGenerator} from '../../theme';
 
+const FONT_FAMILY = 'Poppins-SemiBold';
+
 const CustomTextInput = ({
+  value,
+  onChange,
   placeholder,
   secureTextEntry,
   keyboardType,
   autoCapitalize,
   autoCorrect,
 }) => {
+  let ref = React.useRef();
+
+  useEffect(() => {
+    // when secureTextEntry is true, changing the font in the style directly does not work, this is a workaround
+    if (ref && secureTextEntry) {
+      ref.current.setNativeProps({
+        style: {fontFamily: FONT_FAMILY},
+      });
+    }
+  }, [ref]);
   return (
     <TextInput
+      ref={ref}
       style={styles.main}
+      value={value}
+      onChangeText={(e) => onChange(e)}
       placeholder={placeholder}
       placeholderTextColor={palette.grayAccent}
       selectionColor={palette.accent}
@@ -36,6 +53,6 @@ const styles = StyleSheet.create({
     paddingVertical: pxGenerator(3),
     paddingHorizontal: pxGenerator(5),
     fontSize: 16,
-    fontFamily: 'Poppins-SemiBold',
+    fontFamily: FONT_FAMILY,
   },
 });

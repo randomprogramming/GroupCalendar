@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View} from 'react-native';
 import CustomTextInput from '../../components/CustomTextInput';
 import Typography from '../../components/Typography';
@@ -7,7 +7,27 @@ import styles from './styles';
 import Link from '../../components/Link';
 import CustomButton from '../../components/CustomButton';
 
+const firstName = 'firstName';
+const lastName = 'lastName';
+const email = 'email';
+const password = 'password';
+const repeatedPassword = 'repeatedPassword';
+
 const RegisterScreen = ({navigation}) => {
+  const [registrationData, setRegistrationData] = useState({
+    [firstName]: '',
+    [lastName]: '',
+    [email]: '',
+    [password]: '',
+    [repeatedPassword]: '',
+  });
+
+  const handleDataChange = (newValue, name) => {
+    // newValue is the new value after data changed
+    // name is the name of the field that we want to mutate
+    setRegistrationData({...registrationData, [name]: newValue});
+  };
+
   return (
     <View style={styles.main}>
       <Typography variant="h2">Create a new account</Typography>
@@ -16,18 +36,37 @@ const RegisterScreen = ({navigation}) => {
         and share calendars.
       </Typography>
       <View style={styles.textFieldsContainer}>
-        <CustomTextInput placeholder="First Name" autoCapitalize="words" />
-        <CustomTextInput placeholder="Last Name" autoCapitalize="words" />
+        <CustomTextInput
+          placeholder="First Name"
+          autoCapitalize="words"
+          value={registrationData.firstName}
+          onChange={(newValue) => handleDataChange(newValue, firstName)}
+        />
+        <CustomTextInput
+          placeholder="Last Name"
+          autoCapitalize="words"
+          value={registrationData.lastName}
+          onChange={(newValue) => handleDataChange(newValue, lastName)}
+        />
         <CustomTextInput
           placeholder="Email Name"
           keyboardType="email-address"
           autoCapitalize="none"
+          value={registrationData.email}
+          onChange={(newValue) => handleDataChange(newValue, email)}
         />
-        {/* TODO: Fix this font here
-      When secureTextEntry is true, the font defaults to Roboto
-      Fix: Conditionally change the font if the field is empty or not */}
-        <CustomTextInput placeholder="Password" secureTextEntry />
-        <CustomTextInput placeholder="Confirm Password" secureTextEntry />
+        <CustomTextInput
+          placeholder="Password"
+          secureTextEntry
+          value={registrationData.password}
+          onChange={(newValue) => handleDataChange(newValue, password)}
+        />
+        <CustomTextInput
+          placeholder="Confirm Password"
+          secureTextEntry
+          value={registrationData.repeatedPassword}
+          onChange={(newValue) => handleDataChange(newValue, repeatedPassword)}
+        />
       </View>
 
       <View style={styles.linkContainer}>
@@ -35,7 +74,10 @@ const RegisterScreen = ({navigation}) => {
         <Link onPress={() => console.log('dsa')}>Log in here</Link>
       </View>
 
-      <CustomButton title="Create Account" />
+      <CustomButton
+        title="Create Account"
+        onPress={() => console.log('crt acc')}
+      />
     </View>
   );
 };
