@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {TextInput, StyleSheet} from 'react-native';
 import {palette, pxGenerator} from '../../theme';
 
-const FONT_FAMILY = 'Poppins-SemiBold';
+const FONT_FAMILY = 'Poppins-Medium';
 
 const CustomTextInput = ({
   value,

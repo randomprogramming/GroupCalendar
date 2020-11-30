@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {KeyboardAvoidingView, View} from 'react-native';
 import CustomTextInput from '../../components/CustomTextInput';
 import Typography from '../../components/Typography';
-import {SIGN_IN} from '../../routes/WelcomeRouterNames';
+import {SIGN_IN_SCREEN} from '../../routes/WelcomeRouterNames';
 import styles from './styles';
 import Link from '../../components/Link';
 import CustomButton from '../../components/CustomButton';
@@ -39,26 +39,28 @@ const RegisterScreen = ({navigation}) => {
 
   const handleRegisterPress = () => {
     setIsCreatingAccount(true);
+
     Axios({
       method: 'POST',
       url: REGISTER_URL,
       data: registrationData,
     })
-      .then((res) =>
+      .then((res) => {
         setServerResponse({
           statusCode: res.status,
           message: res.data.message,
-        }),
-      )
-      .catch((err) =>
+        });
+        setIsCreatingAccount(false);
+      })
+      .catch((err) => {
         setServerResponse({
           statusCode: err.status,
           message:
             err.response.data.message ||
             'There was an error creating Your account, please try again.',
-        }),
-      );
-    setIsCreatingAccount(false);
+        });
+        setIsCreatingAccount(false);
+      });
   };
 
   return (
@@ -86,7 +88,7 @@ const RegisterScreen = ({navigation}) => {
               marginTop={FIELD_MARGIN}
             />
             <CustomTextInput
-              placeholder="Email Name"
+              placeholder="Email"
               keyboardType="email-address"
               autoCapitalize="none"
               value={registrationData.email}
@@ -109,6 +111,7 @@ const RegisterScreen = ({navigation}) => {
               }
               marginTop={FIELD_MARGIN}
             />
+
             {/* 
             This is the message that the server responds to 
             TODO: Style this according to the status code, make it green for 200 and red for 400
@@ -118,7 +121,7 @@ const RegisterScreen = ({navigation}) => {
 
           <View style={styles.linkContainer}>
             <Typography>Already have an account? </Typography>
-            <Link onPress={() => navigation.navigate(SIGN_IN)}>
+            <Link onPress={() => navigation.navigate(SIGN_IN_SCREEN)}>
               Log in here
             </Link>
           </View>

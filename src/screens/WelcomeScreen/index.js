@@ -4,7 +4,7 @@ import CustomButton from '../../components/CustomButton';
 import Typography from '../../components/Typography';
 import styles from './styles';
 import Logo from '../../../static/images/logo.png';
-import {REGISTER} from '../../routes/WelcomeRouterNames';
+import {REGISTER_SCREEN, SIGN_IN_SCREEN} from '../../routes/WelcomeRouterNames';
 
 const WelcomeScreen = ({navigation}) => {
   return (
@@ -14,10 +14,13 @@ const WelcomeScreen = ({navigation}) => {
         <Image source={Logo} style={styles.image} />
       </View>
       <View>
-        <CustomButton title="Sign In" />
+        <CustomButton
+          title="Sign In"
+          onPress={() => navigation.navigate(SIGN_IN_SCREEN)}
+        />
         <CustomButton
           title="Register"
-          onPress={() => navigation.navigate(REGISTER)}
+          onPress={() => navigation.navigate(REGISTER_SCREEN)}
         />
       </View>
     </View>
