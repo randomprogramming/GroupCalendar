@@ -6,10 +6,13 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: palette.backgroundDark,
   },
+  flexGrow: {
+    flexGrow: 1,
+  },
   contentContainer: {
     paddingHorizontal: pxGenerator(5),
     paddingVertical: pxGenerator(5),
-    flexGrow: 1,
+    flex: 1,
   },
   linkContainer: {
     flexDirection: 'row',
