@@ -7,6 +7,8 @@ import styles from './styles';
 import Link from '../../components/Link';
 import CustomButton from '../../components/CustomButton';
 import {ScrollView} from 'react-native-gesture-handler';
+import Axios from 'axios';
+import {REGISTER_URL} from '../../../apiLinks';
 
 const firstName = 'firstName';
 const lastName = 'lastName';
@@ -23,11 +25,40 @@ const RegisterScreen = ({navigation}) => {
     [password]: '',
     [repeatedPassword]: '',
   });
+  const [isCreatingAccount, setIsCreatingAccount] = useState(false);
+  const [serverResponse, setServerResponse] = useState({
+    statusCode: 0,
+    message: '',
+  });
 
   const handleDataChange = (newValue, name) => {
     // newValue is the new value after data changed
     // name is the name of the field that we want to mutate
     setRegistrationData({...registrationData, [name]: newValue});
+  };
+
+  const handleRegisterPress = () => {
+    setIsCreatingAccount(true);
+    Axios({
+      method: 'POST',
+      url: REGISTER_URL,
+      data: registrationData,
+    })
+      .then((res) =>
+        setServerResponse({
+          statusCode: res.status,
+          message: res.data.message,
+        }),
+      )
+      .catch((err) =>
+        setServerResponse({
+          statusCode: err.status,
+          message:
+            err.response.data.message ||
+            'There was an error creating Your account, please try again.',
+        }),
+      );
+    setIsCreatingAccount(false);
   };
 
   return (
@@ -78,6 +109,11 @@ const RegisterScreen = ({navigation}) => {
               }
               marginTop={FIELD_MARGIN}
             />
+            {/* 
+            This is the message that the server responds to 
+            TODO: Style this according to the status code, make it green for 200 and red for 400
+            */}
+            <Typography>{serverResponse.message}</Typography>
           </View>
 
           <View style={styles.linkContainer}>
@@ -88,8 +124,9 @@ const RegisterScreen = ({navigation}) => {
           </View>
 
           <CustomButton
+            disabled={isCreatingAccount}
             title="Create Account"
-            onPress={() => console.log('crt acc')}
+            onPress={handleRegisterPress}
           />
         </View>
       </ScrollView>
