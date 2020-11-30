@@ -9,6 +9,7 @@ export const fetchAccount = () => {
       url: ME_URL,
     })
       .then((res) => dispatch(assignAccount({...res.data})))
+      // TODO: Handle this error somehow
       .catch((err) => console.log(err));
   };
 };
