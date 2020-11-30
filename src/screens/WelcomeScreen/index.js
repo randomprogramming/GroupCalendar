@@ -4,7 +4,10 @@ import CustomButton from '../../components/CustomButton';
 import Typography from '../../components/Typography';
 import styles from './styles';
 import Logo from '../../../static/images/logo.png';
-import {REGISTER_SCREEN, SIGN_IN_SCREEN} from '../../routes/WelcomeRouterNames';
+import {
+  REGISTER_SCREEN,
+  SIGN_IN_SCREEN,
+} from '../../routes/WelcomeRouter/names';
 
 const WelcomeScreen = ({navigation}) => {
   return (

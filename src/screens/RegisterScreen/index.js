@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {KeyboardAvoidingView, View} from 'react-native';
 import CustomTextInput from '../../components/CustomTextInput';
 import Typography from '../../components/Typography';
-import {SIGN_IN_SCREEN} from '../../routes/WelcomeRouterNames';
+import {SIGN_IN_SCREEN} from '../../routes/WelcomeRouter/names';
 import styles from './styles';
 import Link from '../../components/Link';
 import CustomButton from '../../components/CustomButton';
