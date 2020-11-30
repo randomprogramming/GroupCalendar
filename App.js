@@ -3,8 +3,11 @@ import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {palette} from './theme';
 import WelcomeRouter from './src/routes/WelcomeRouter';
+import {useSelector} from 'react-redux';
 
 const App = () => {
+  const isLoggedIn = useSelector((state) => state.accountReducer.isLoggedIn);
+
   return (
     <NavigationContainer>
       <StatusBar
