@@ -9,6 +9,8 @@ import CustomButton from '../../components/CustomButton';
 import {ScrollView} from 'react-native-gesture-handler';
 import Axios from 'axios';
 import {LOGIN_URL} from '../../../apiLinks';
+import {useDispatch} from 'react-redux';
+import {fetchAccount} from '../../actions/accountActions';
 
 const email = 'email';
 const password = 'password';
@@ -25,6 +27,8 @@ const LoginScreen = ({navigation}) => {
     statusCode: 0,
     message: '',
   });
+
+  const dispatch = useDispatch();
 
   const handleDataChange = (newValue, name) => {
     // newValue is the new value after data changed
@@ -46,6 +50,7 @@ const LoginScreen = ({navigation}) => {
           message: res.data.message,
         });
         setIsLoggingIn(false);
+        dispatch(fetchAccount());
       })
       .catch((err) => {
         setServerResponse({

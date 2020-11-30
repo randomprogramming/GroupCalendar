@@ -1,13 +1,16 @@
+import Axios from 'axios';
+import {ME_URL} from '../../apiLinks';
 import {ASSIGN_ACCOUNT} from './types';
 
 export const fetchAccount = () => {
-  console.log('Fetching account');
-
-  return assignAccount({
-    firstName: 'tester',
-    lastName: 'moreTester',
-    isLoggedIn: true,
-  });
+  return (dispatch) => {
+    Axios({
+      method: 'GET',
+      url: ME_URL,
+    })
+      .then((res) => dispatch(assignAccount({...res.data})))
+      .catch((err) => console.log(err));
+  };
 };
 
 export const assignAccount = (account) => ({
