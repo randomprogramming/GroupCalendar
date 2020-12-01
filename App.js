@@ -3,6 +3,7 @@ import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {palette} from './theme';
 import WelcomeRouter from './src/routes/WelcomeRouter';
+import LoggedInRouter from './src/routes/LoggedInRouter';
 import {useSelector} from 'react-redux';
 
 const App = () => {
@@ -15,7 +16,7 @@ const App = () => {
         backgroundColor={palette.backgroundDark}
       />
       <SafeAreaView style={styles.main}>
-        <WelcomeRouter />
+        {isLoggedIn ? <LoggedInRouter /> : <WelcomeRouter />}
       </SafeAreaView>
     </NavigationContainer>
   );

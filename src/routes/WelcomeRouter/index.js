@@ -9,7 +9,7 @@ const Stack = createStackNavigator();
 
 const WelcomeRouter = () => {
   return (
-    <Stack.Navigator headerMode="none">
+    <Stack.Navigator headerMode="none" initialRouteName={HOMEPAGE_SCREEN}>
       <Stack.Screen name={HOMEPAGE_SCREEN} component={WelcomeScreen} />
       <Stack.Screen name={REGISTER_SCREEN} component={RegisterScreen} />
       <Stack.Screen name={SIGN_IN_SCREEN} component={LoginScreen} />
