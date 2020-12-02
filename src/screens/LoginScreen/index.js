@@ -10,7 +10,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import Axios from 'axios';
 import {LOGIN_URL} from '../../../apiLinks';
 import {useDispatch} from 'react-redux';
-import {fetchAccount} from '../../actions/accountActions';
+import {storeToken} from '../../actions/accountActions';
 
 const email = 'email';
 const password = 'password';
@@ -36,9 +36,8 @@ const LoginScreen = ({navigation}) => {
     setLoginData({...loginData, [name]: newValue});
   };
 
-  const handleLoginPress = () => {
+  const handleLoginPress = async () => {
     setIsLoggingIn(true);
-
     Axios({
       method: 'POST',
       url: LOGIN_URL,
@@ -49,8 +48,8 @@ const LoginScreen = ({navigation}) => {
           statusCode: res.status,
           message: res.data.message,
         });
-        setIsLoggingIn(false);
-        dispatch(fetchAccount());
+        // Save the token we got in the Keychain
+        dispatch(storeToken(res.data.token));
       })
       .catch((err) => {
         setServerResponse({

@@ -1,13 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {palette} from './theme';
 import WelcomeRouter from './src/routes/WelcomeRouter';
 import LoggedInRouter from './src/routes/LoggedInRouter';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {fetchAccount} from './src/actions/accountActions';
 
 const App = () => {
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.accountReducer.isLoggedIn);
+
+  useEffect(() => {
+    // Fetch the account whenever the app is open
+    dispatch(fetchAccount());
+  }, []);
 
   return (
     <NavigationContainer>

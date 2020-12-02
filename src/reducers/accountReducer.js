@@ -1,4 +1,4 @@
-import {ASSIGN_ACCOUNT} from '../actions/types';
+import {ASSIGN_ACCOUNT, CLEAR_ACCOUNT} from '../actions/types';
 
 const initialState = {
   firstName: '',
@@ -10,7 +10,8 @@ export default (state = initialState, {type, payload}) => {
   switch (type) {
     case ASSIGN_ACCOUNT:
       return {...state, ...payload};
-
+    case CLEAR_ACCOUNT:
+      return initialState;
     default:
       return state;
   }
