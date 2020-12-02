@@ -14,6 +14,7 @@ const App = () => {
   useEffect(() => {
     // Fetch the account whenever the app is open
     dispatch(fetchAccount());
+    //eslint-disable-next-line
   }, []);
 
   return (

@@ -11,7 +11,7 @@ export const fetchAccount = () => {
     if (password) {
       // If it is, check if it is valid
       Axios({
-        method: 'POST',
+        method: 'GET',
         url: ME_URL,
         headers: {
           authorization: password,
@@ -21,7 +21,10 @@ export const fetchAccount = () => {
         .then((res) => dispatch(assignAccount({...res.data})))
         // If we get an error, clear the accountState and clear the token
         .catch((err) => {
-          console.log('Error when fetching account: ', err);
+          console.log(
+            'Error when fetching account:',
+            err.response.data.message,
+          );
           Keychain.resetGenericPassword();
           dispatch(clearAccountState());
         });
@@ -38,8 +41,10 @@ export const storeToken = (token) => {
     const credentials = await Keychain.setGenericPassword('token', token);
     // If the token successfully saved, fetch the account, else clear the account
     if (credentials) {
+      console.log('Stored token, fetching account.');
       dispatch(fetchAccount());
     } else {
+      console.log('Token not stored, clearing account state.');
       dispatch(clearAccountState());
     }
   };
@@ -51,5 +56,6 @@ export const clearAccountState = () => ({
 
 export const assignAccount = (account) => ({
   type: ASSIGN_ACCOUNT,
-  payload: account,
+  // Logged in is true if there's an email and the email has some length
+  payload: {...account, isLoggedIn: account.email && account.email.length > 0},
 });

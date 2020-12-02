@@ -50,6 +50,7 @@ const LoginScreen = ({navigation}) => {
         });
         // Save the token we got in the Keychain
         dispatch(storeToken(res.data.token));
+        setIsLoggingIn(false);
       })
       .catch((err) => {
         setServerResponse({
@@ -89,8 +90,7 @@ const LoginScreen = ({navigation}) => {
               marginTop={FIELD_MARGIN}
             />
 
-            {/* This is the message that the server responds to 
-            TODO: Style this according to the status code, make it green for 200 and red for 400 */}
+            {/* TODO: Style this according to the status code, make it green for 200 and red for 400 */}
             <Typography>{serverResponse.message}</Typography>
           </View>
 

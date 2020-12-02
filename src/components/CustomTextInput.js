@@ -23,7 +23,9 @@ const CustomTextInput = ({
         style: {fontFamily: FONT_FAMILY},
       });
     }
+    //eslint-disable-next-line
   }, [ref]);
+
   return (
     <TextInput
       ref={ref}
