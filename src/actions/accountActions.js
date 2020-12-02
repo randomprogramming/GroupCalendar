@@ -4,6 +4,7 @@ import {ASSIGN_ACCOUNT, CLEAR_ACCOUNT} from './types';
 import * as Keychain from 'react-native-keychain';
 
 export const fetchAccount = () => {
+  // Keychain.resetGenericPassword();
   return async (dispatch) => {
     // Password is the token
     const {password} = await Keychain.getGenericPassword();

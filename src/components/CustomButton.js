@@ -14,7 +14,9 @@ const CustomButton = ({onPress, title, disabled}) => {
       ]}
       onPress={onPress}
       disabled={disabled}>
-      <Typography darkText>{title}</Typography>
+      <Typography darkText fontWeight={600}>
+        {title}
+      </Typography>
     </TouchableOpacity>
   );
 };
