@@ -2,10 +2,10 @@ import React from 'react';
 import {StatusBar, StyleSheet, View} from 'react-native';
 import {palette} from '../../theme';
 import Typography from './Typography';
-
 import Icon from 'react-native-vector-icons/Ionicons';
+import {ADD_JOIN_CALENDAR_SCREEN} from '../routes/LoggedInRouter/names';
 
-const Header = () => {
+const Header = ({navigate}) => {
   return (
     <View style={styles.main}>
       {/* Override the default statusbar */}
@@ -13,9 +13,7 @@ const Header = () => {
         barStyle="light-content"
         backgroundColor={palette.backgroundGray}
       />
-      <View style={styles.sideItem}>
-        <Typography>test</Typography>
-      </View>
+      <View style={styles.sideItem}>{/* <Typography></Typography> */}</View>
       <View style={styles.flex}>
         <Typography variant="title">Calendars</Typography>
       </View>
@@ -25,7 +23,7 @@ const Header = () => {
           color={palette.white}
           backgroundColor="transparent"
           size={26}
-          onPress={() => console.log('add')}
+          onPress={() => navigate(ADD_JOIN_CALENDAR_SCREEN)}
           underlayColor="transparent"
         />
       </View>
