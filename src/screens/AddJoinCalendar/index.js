@@ -1,14 +1,19 @@
-import React from 'react';
-import {View} from 'react-native';
+import React, {useState} from 'react';
+import {StatusBar, View} from 'react-native';
 import Typography from '../../components/Typography';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {ScrollView} from 'react-native-gesture-handler';
 import {TouchableOpacity} from 'react-native';
 import styles from './styles';
-import Header from '../../components/Header';
+import CustomTextInput from '../../components/CustomTextInput';
+import CustomButton from '../../components/CustomButton';
+import Axios from 'axios';
+import {CREATE_CALENDAR} from '../../../apiLinks';
+import Keychain from 'react-native-keychain';
+import {palette} from '../../../theme';
 
 // This entire component is written badly
-// .. which is why everything is in one file and not organized
+// .. which is why everything is in one file and not organized and hardcoded
 
 // TODO: Rewrite this
 
@@ -16,6 +21,7 @@ const Tab = createBottomTabNavigator();
 
 const JOIN_CALENDAR_SCREEN = 'JOIN_CALENDAR_SCREEN';
 const CREATE_CALENDAR_SCREEN = 'CREATE_CALENDAR_SCREEN';
+const FIELD_MARGIN = 5;
 
 const TabNavigator = ({
   routeName,
@@ -50,7 +56,7 @@ const TabNavigator = ({
           <Typography
             darkText={routeName === secondScreenName}
             fontWeight={600}>
-            {firstScreenButtonTitle}
+            {secondScreenButtonTitle}
           </Typography>
         </TouchableOpacity>
         <TouchableOpacity
@@ -65,7 +71,7 @@ const TabNavigator = ({
           disabled={routeName === firstScreenName}
           onPress={() => navigate(firstScreenName)}>
           <Typography darkText={routeName === firstScreenName} fontWeight={600}>
-            {secondScreenButtonTitle}
+            {firstScreenButtonTitle}
           </Typography>
         </TouchableOpacity>
       </View>
@@ -73,11 +79,50 @@ const TabNavigator = ({
   );
 };
 
-const JoinCalendarScreen = ({navigation, route}) => {
+const CreateCalendarScreen = ({navigation, route}) => {
+  const [title, setTitle] = useState('');
+  const [joinPassword, setJoinPassword] = useState('');
+
+  const handleCalendarCreate = async () => {
+    const cred = await Keychain.getGenericPassword();
+
+    Axios({
+      method: 'POST',
+      url: CREATE_CALENDAR,
+      data: {
+        title,
+        joinPassword,
+      },
+      headers: {
+        authorization: cred.password,
+      },
+    });
+  };
+
   return (
     <View style={styles.main}>
-      <View style={{flex: 1}}>
-        <Typography>Create</Typography>
+      <View style={styles.contentContainer}>
+        <Typography variant="h2">Create a new Group Calendar</Typography>
+        <Typography>
+          Invite Your friends, family or coworkers to Your new calendar
+        </Typography>
+        <CustomTextInput
+          marginTop={FIELD_MARGIN}
+          placeholder="Calendar Title"
+          value={title}
+          onChange={setTitle}
+        />
+        <CustomTextInput
+          marginTop={FIELD_MARGIN}
+          placeholder="Calendar Password"
+          value={joinPassword}
+          onChange={setJoinPassword}
+        />
+        <CustomButton
+          title="Create"
+          marginTop={FIELD_MARGIN}
+          onPress={handleCalendarCreate}
+        />
       </View>
       <TabNavigator
         firstScreenName={JOIN_CALENDAR_SCREEN}
@@ -91,10 +136,10 @@ const JoinCalendarScreen = ({navigation, route}) => {
   );
 };
 
-const CreateCalendarScreen = ({navigation, route}) => {
+const JoinCalendarScreen = ({navigation, route}) => {
   return (
     <View style={styles.main}>
-      <View style={{flex: 1}}>
+      <View style={styles.contentContainer}>
         <Typography>Join</Typography>
       </View>
       <TabNavigator
@@ -111,13 +156,22 @@ const CreateCalendarScreen = ({navigation, route}) => {
 
 const AddJoinCalendar = () => {
   return (
-    <Tab.Navigator screenOptions={{tabBarVisible: false}}>
-      <Tab.Screen
-        name={CREATE_CALENDAR_SCREEN}
-        component={CreateCalendarScreen}
+    <>
+      <StatusBar
+        backgroundColor={palette.backgroundDark}
+        barStyle="light-content"
       />
-      <Tab.Screen name={JOIN_CALENDAR_SCREEN} component={JoinCalendarScreen} />
-    </Tab.Navigator>
+      <Tab.Navigator screenOptions={{tabBarVisible: false}}>
+        <Tab.Screen
+          name={CREATE_CALENDAR_SCREEN}
+          component={CreateCalendarScreen}
+        />
+        <Tab.Screen
+          name={JOIN_CALENDAR_SCREEN}
+          component={JoinCalendarScreen}
+        />
+      </Tab.Navigator>
+    </>
   );
 };
 

@@ -4,13 +4,14 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {palette, pxGenerator} from '../../theme';
 import Typography from './Typography';
 
-const CustomButton = ({onPress, title, disabled}) => {
+const CustomButton = ({onPress, title, disabled, marginTop}) => {
   return (
     <TouchableOpacity
       style={[
         styles.main,
         // If button is disabled, set some gray color on it
-        disabled ? {backgroundColor: palette.grayAccent} : {},
+        disabled && {backgroundColor: palette.grayAccent},
+        marginTop && {marginTop: pxGenerator(marginTop)},
       ]}
       onPress={onPress}
       disabled={disabled}>
