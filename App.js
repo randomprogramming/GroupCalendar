@@ -5,7 +5,7 @@ import {palette} from './theme';
 import WelcomeRouter from './src/routes/WelcomeRouter';
 import LoggedInRouter from './src/routes/LoggedInRouter';
 import {useSelector, useDispatch} from 'react-redux';
-import {fetchAccount} from './src/actions/accountActions';
+import {checkKeychainForToken} from './src/actions/tokenActions';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const App = () => {
 
   useEffect(() => {
     // Fetch the account whenever the app is open
-    dispatch(fetchAccount());
+    dispatch(checkKeychainForToken());
     //eslint-disable-next-line
   }, []);
 

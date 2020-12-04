@@ -10,7 +10,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import Axios from 'axios';
 import {LOGIN_URL} from '../../../apiLinks';
 import {useDispatch} from 'react-redux';
-import {storeToken} from '../../actions/accountActions';
+import {processToken} from '../../actions/tokenActions';
 
 const email = 'email';
 const password = 'password';
@@ -49,7 +49,7 @@ const LoginScreen = ({navigation}) => {
           message: res.data.message,
         });
         // Save the token we got in the Keychain
-        dispatch(storeToken(res.data.token));
+        dispatch(processToken(res.data.token));
         setIsLoggingIn(false);
       })
       .catch((err) => {
