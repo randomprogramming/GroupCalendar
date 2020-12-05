@@ -7,7 +7,7 @@ export default StyleSheet.create({
     backgroundColor: palette.backgroundDark,
   },
   contentContainer: {
-    marginTop: pxGenerator(5),
+    marginVertical: pxGenerator(5),
     paddingHorizontal: pxGenerator(5),
   },
 });
