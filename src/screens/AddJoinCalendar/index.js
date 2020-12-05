@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {StatusBar, View} from 'react-native';
 import Typography from '../../components/Typography';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {ScrollView} from 'react-native-gesture-handler';
 import {TouchableOpacity} from 'react-native';
 import styles from './styles';
 import CustomTextInput from '../../components/CustomTextInput';
@@ -11,6 +10,7 @@ import Axios from 'axios';
 import {CREATE_CALENDAR} from '../../../apiLinks';
 import Keychain from 'react-native-keychain';
 import {palette} from '../../../theme';
+import {useSelector} from 'react-redux';
 
 // This entire component is written badly
 // .. which is why everything is in one file and not organized and hardcoded
@@ -82,10 +82,9 @@ const TabNavigator = ({
 const CreateCalendarScreen = ({navigation, route}) => {
   const [title, setTitle] = useState('');
   const [joinPassword, setJoinPassword] = useState('');
+  const token = useSelector((state) => state.tokenReducer.token);
 
-  const handleCalendarCreate = async () => {
-    const cred = await Keychain.getGenericPassword();
-
+  const handleCalendarCreate = () => {
     Axios({
       method: 'POST',
       url: CREATE_CALENDAR,
@@ -94,7 +93,7 @@ const CreateCalendarScreen = ({navigation, route}) => {
         joinPassword,
       },
       headers: {
-        authorization: cred.password,
+        authorization: token,
       },
     });
   };

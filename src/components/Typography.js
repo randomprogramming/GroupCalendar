@@ -9,6 +9,7 @@ const Typography = ({
   variant,
   onPress,
   children,
+  color,
 }) => {
   const getTextStyle = () => {
     const tmpStyle = [];
@@ -72,6 +73,10 @@ const Typography = ({
       tmpStyle.push(styles.darkText);
     } else {
       tmpStyle.push(styles.lightText);
+    }
+
+    if (color) {
+      tmpStyle.push({color});
     }
 
     return tmpStyle;

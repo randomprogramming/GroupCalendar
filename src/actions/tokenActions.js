@@ -9,6 +9,10 @@ export const checkKeychainForToken = () => {
     // Check if the token is present
     if (password) {
       dispatch(processToken(password));
+    } else {
+      // If not make sure the state is cleared
+      dispatch(clearToken());
+      dispatch(clearAccountState());
     }
   };
 };
