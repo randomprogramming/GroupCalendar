@@ -42,8 +42,11 @@ const LoginScreen = ({navigation}) => {
       method: 'POST',
       url: LOGIN_URL,
       data: loginData,
+      timeout: 7000, // If there was no response in 7 seconds,
+      // timeout the request
     })
       .then((res) => {
+        console.log('There was no error lol');
         setServerResponse({
           statusCode: res.status,
           message: res.data.message,
@@ -54,9 +57,12 @@ const LoginScreen = ({navigation}) => {
       })
       .catch((err) => {
         setServerResponse({
-          statusCode: err.status,
+          statusCode: err && err.status,
           message:
-            err.response.data.message ||
+            (err &&
+              err.response &&
+              err.response.data &&
+              err.response.data.message) ||
             'There was an error logging You in, please try again.',
         });
         setIsLoggingIn(false);
