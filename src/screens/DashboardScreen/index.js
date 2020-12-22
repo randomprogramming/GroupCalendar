@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, ScrollView, Image, RefreshControl} from 'react-native';
+import {View, ScrollView, RefreshControl} from 'react-native';
 import {useSelector} from 'react-redux';
 import Typography from '../../components/Typography';
 import styles from './styles';
@@ -7,7 +7,7 @@ import Header from '../../components/Header';
 import Axios from 'axios';
 import {JOINED_CALENDARS} from '../../../apiLinks';
 import CalendarImage from '../../../static/images/calendar.png';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import CalendarContainer from './CalendarContainer';
 
 const DashboardScreen = ({navigation}) => {
   const token = useSelector((state) => state.tokenReducer.token);
@@ -28,72 +28,16 @@ const DashboardScreen = ({navigation}) => {
     },
   ]);
 
-  const getDifferenceInDates = (date) => {
-    let today = new Date();
-    let wantedDate = new Date(date);
-
-    return Math.floor((today - wantedDate) / (1000 * 60));
-  };
-
   const renderJoinedCalendars = () => {
     return joinedCalendars.map((calendar) => (
-      <TouchableOpacity
+      <CalendarContainer
         key={calendar._id}
-        style={{
-          borderRadius: 16,
-          borderColor: '#5c5b66',
-          borderWidth: 1,
-          overflow: 'hidden',
-          marginTop: 16,
-        }}>
-        <View
-          style={{
-            height: 150,
-            backgroundColor: '#3a1326',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Image
-            source={CalendarImage}
-            style={{height: 120, width: 120 * 1.614}}
-          />
-        </View>
-        <View style={{flex: 1, padding: 8, backgroundColor: '#1e1c24'}}>
-          <Typography variant="h2">{calendar.title}</Typography>
-          <Typography>{`Last Edited: ${getDifferenceInDates(
-            calendar.updatedAt,
-          )} minute(s) ago`}</Typography>
-          <Typography>Last Edited by: Name Lastname</Typography>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <View
-              style={{
-                height: 12,
-                width: 12,
-                borderRadius: 12,
-                backgroundColor: '#FFAB48',
-                marginTop: -4,
-              }}
-            />
-            <View style={{marginLeft: 4}}>
-              <Typography color="#FFAB48">2 events today</Typography>
-            </View>
-          </View>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <View
-              style={{
-                height: 12,
-                width: 12,
-                borderRadius: 12,
-                backgroundColor: '#FB3737',
-                marginTop: -4,
-              }}
-            />
-            <View style={{marginLeft: 4}}>
-              <Typography color="#FB3737">3 deadlines</Typography>
-            </View>
-          </View>
-        </View>
-      </TouchableOpacity>
+        _id={calendar._id}
+        title={calendar.title}
+        updatedAt={calendar.updatedAt}
+        image={CalendarImage}
+        navigate={navigation.navigate}
+      />
     ));
   };
 
@@ -106,7 +50,9 @@ const DashboardScreen = ({navigation}) => {
       },
     })
       .then((res) => setJoinedCalendars(res.data.joinedCalendars))
-      .catch((err) => console.log('err,', err));
+      .catch((err) =>
+        console.log('Error when fetching joined calendars: ', err),
+      );
   };
 
   useEffect(() => {

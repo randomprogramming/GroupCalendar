@@ -15,7 +15,7 @@ import {processToken} from '../../actions/tokenActions';
 const email = 'email';
 const password = 'password';
 
-const FIELD_MARGIN = 5;
+const FIELD_MARGIN = 6;
 
 const LoginScreen = ({navigation}) => {
   const [loginData, setLoginData] = useState({
@@ -59,10 +59,7 @@ const LoginScreen = ({navigation}) => {
         setServerResponse({
           statusCode: err && err.status,
           message:
-            (err &&
-              err.response &&
-              err.response.data &&
-              err.response.data.message) ||
+            (err && err.response && err.response.data) ||
             'There was an error logging You in, please try again.',
         });
         setIsLoggingIn(false);

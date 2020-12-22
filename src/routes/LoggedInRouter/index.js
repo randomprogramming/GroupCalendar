@@ -2,7 +2,12 @@ import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import AddJoinCalendar from '../../screens/AddJoinCalendar';
 import DashboardScreen from '../../screens/DashboardScreen';
-import {ADD_JOIN_CALENDAR_SCREEN, DASHBOARD_SCREEN} from './names';
+import OpenCalendarScreen from '../../screens/OpenCalendarScreen';
+import {
+  ADD_JOIN_CALENDAR_SCREEN,
+  DASHBOARD_SCREEN,
+  OPEN_CALENDAR_SCREEN,
+} from './names';
 
 const Stack = createStackNavigator();
 
@@ -13,6 +18,10 @@ const WelcomeRouter = () => {
       <Stack.Screen
         name={ADD_JOIN_CALENDAR_SCREEN}
         component={AddJoinCalendar}
+      />
+      <Stack.Screen
+        name={OPEN_CALENDAR_SCREEN}
+        component={OpenCalendarScreen}
       />
     </Stack.Navigator>
   );

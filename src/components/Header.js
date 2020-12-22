@@ -5,7 +5,7 @@ import Typography from './Typography';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {ADD_JOIN_CALENDAR_SCREEN} from '../routes/LoggedInRouter/names';
 
-const Header = ({navigate}) => {
+const Header = ({navigate, title}) => {
   return (
     <View style={styles.main}>
       {/* Override the default statusbar */}
@@ -15,17 +15,17 @@ const Header = ({navigate}) => {
       />
       <View style={styles.sideItem}>{/* <Typography></Typography> */}</View>
       <View style={styles.flex}>
-        <Typography variant="title">Calendars</Typography>
+        <Typography variant="title">{title}</Typography>
       </View>
       <View style={styles.sideItem}>
-        <Icon.Button
+        {/* <Icon.Button
           name="ios-add"
           color={palette.white}
           backgroundColor="transparent"
           size={26}
           onPress={() => navigate(ADD_JOIN_CALENDAR_SCREEN)}
           underlayColor="transparent"
-        />
+        /> */}
       </View>
     </View>
   );
