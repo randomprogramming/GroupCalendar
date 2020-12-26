@@ -42,8 +42,7 @@ const LoginScreen = ({navigation}) => {
       method: 'POST',
       url: LOGIN_URL,
       data: loginData,
-      timeout: 7000, // If there was no response in 7 seconds,
-      // timeout the request
+      timeout: 7000, // If there was no response in 7 seconds, timeout the request
     })
       .then((res) => {
         console.log('There was no error lol');
