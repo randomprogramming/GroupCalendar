@@ -5,7 +5,7 @@ import Typography from './Typography';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {ADD_JOIN_CALENDAR_SCREEN} from '../routes/LoggedInRouter/names';
 
-const Header = ({navigate, title}) => {
+const Header = ({navigate, title, children}) => {
   return (
     <View style={styles.main}>
       {/* Override the default statusbar */}
@@ -13,12 +13,13 @@ const Header = ({navigate, title}) => {
         barStyle="light-content"
         backgroundColor={palette.backgroundGray}
       />
-      <View style={styles.sideItem}>{/* <Typography></Typography> */}</View>
-      <View style={styles.flex}>
-        <Typography variant="title">{title}</Typography>
-      </View>
-      <View style={styles.sideItem}>
-        {/* <Icon.Button
+      <View style={styles.upperHeader}>
+        <View style={styles.sideItem}>{/* <Typography></Typography> */}</View>
+        <View style={styles.flex}>
+          <Typography variant="title">{title}</Typography>
+        </View>
+        <View style={styles.sideItem}>
+          {/* <Icon.Button
           name="ios-add"
           color={palette.white}
           backgroundColor="transparent"
@@ -26,7 +27,9 @@ const Header = ({navigate, title}) => {
           onPress={() => navigate(ADD_JOIN_CALENDAR_SCREEN)}
           underlayColor="transparent"
         /> */}
+        </View>
       </View>
+      <View>{children}</View>
     </View>
   );
 };
@@ -35,13 +38,16 @@ export default Header;
 
 const styles = StyleSheet.create({
   main: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     backgroundColor: palette.backgroundGray,
+    borderBottomWidth: 1,
+    borderBottomColor: palette.grayAccent,
+  },
+  upperHeader: {
+    flexDirection: 'row',
     height: 42,
     justifyContent: 'center',
     alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: palette.grayAccent,
   },
   // Set a fixed width on side items to keep the title centered
   sideItem: {

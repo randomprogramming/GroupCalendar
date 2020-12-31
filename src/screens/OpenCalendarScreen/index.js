@@ -37,9 +37,11 @@ const OpenCalendarScreen = ({route}) => {
 
   return (
     <>
-      <Header title={activeCalendar.title} />
-      <View style={styles.main}>
+      <Header title={activeCalendar.title}>
         <DaySelector />
+      </Header>
+      <View style={styles.main}>
+        <Typography>Test</Typography>
       </View>
     </>
   );
