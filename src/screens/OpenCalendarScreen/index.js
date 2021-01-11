@@ -7,6 +7,7 @@ import Header from '../../components/Header';
 import Typography from '../../components/Typography';
 import DaySelector from './DaySelector';
 import styles from './styles';
+import CustomButton from '../../components/CustomButton';
 
 const OpenCalendarScreen = ({route}) => {
   // Calendar id
@@ -42,6 +43,9 @@ const OpenCalendarScreen = ({route}) => {
       </Header>
       <View style={styles.main}>
         <Typography>Test</Typography>
+      </View>
+      <View style={styles.buttonContainer}>
+        <CustomButton title="Create new event" style={styles.newEventButton} />
       </View>
     </>
   );

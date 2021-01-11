@@ -27,7 +27,7 @@ const DaySelector = () => {
   }, []);
 
   return (
-    // TODO:
+    // TODO: extract the styles
     <CalendarStrip
       startingDate={start}
       selectedDate={start}
