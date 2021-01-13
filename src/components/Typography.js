@@ -6,6 +6,7 @@ const Typography = ({
   // default font weight is 500 and light font color
   fontWeight = 500,
   darkText = false,
+  fontSize,
   variant,
   onPress,
   children,
@@ -52,6 +53,11 @@ const Typography = ({
       }
 
       return tmpStyle;
+    } else {
+      // If variant is not selected, we can change size of text
+      if (fontSize) {
+        tmpStyle.push({fontSize});
+      }
     }
 
     // If the pre-defined variant isn't selected, create a text based off the props
