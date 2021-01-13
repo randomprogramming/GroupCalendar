@@ -95,6 +95,6 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     padding: 8,
-    backgroundColor: '#1e1c24',
+    backgroundColor: palette.backgroundGray,
   },
 });

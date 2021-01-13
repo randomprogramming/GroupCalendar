@@ -8,8 +8,9 @@ import Typography from '../../components/Typography';
 import DaySelector from './DaySelector';
 import styles from './styles';
 import CustomButton from '../../components/CustomButton';
+import {CREATE_EVENT_SCREEN} from '../../routes/LoggedInRouter/names';
 
-const OpenCalendarScreen = ({route}) => {
+const OpenCalendarScreen = ({route, navigation}) => {
   // Calendar id
   const {_id} = route.params;
 
@@ -45,7 +46,11 @@ const OpenCalendarScreen = ({route}) => {
         <Typography>Test</Typography>
       </View>
       <View style={styles.buttonContainer}>
-        <CustomButton title="Create new event" style={styles.newEventButton} />
+        <CustomButton
+          title="Create new event"
+          style={styles.newEventButton}
+          onPress={() => navigation.navigate(CREATE_EVENT_SCREEN)}
+        />
       </View>
     </>
   );

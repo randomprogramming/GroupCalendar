@@ -1,4 +1,3 @@
-// import React from 'react'
 import {StyleSheet} from 'react-native';
 import {palette, pxGenerator} from '../../../theme';
 import {Dimensions} from 'react-native';
