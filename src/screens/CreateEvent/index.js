@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {TextInput, View} from 'react-native';
+import {TextInput, View, ScrollView} from 'react-native';
 import {Calendar} from 'react-native-calendars';
-import {palette} from '../../../theme';
+import {palette, pxGenerator} from '../../../theme';
 import Header from '../../components/Header';
+import SwitchButton from '../../components/SwitchButton';
 import Typography from '../../components/Typography';
 import styles from './styles';
 
@@ -27,22 +28,22 @@ const CreateEvent = () => {
   return (
     <>
       <Header title="Create an event" />
-      <View style={styles.main}>
+      <ScrollView style={styles.main}>
         <TextInput
           placeholder="Title"
           style={styles.titleTextInput}
           placeholderTextColor={palette.grayAccent}
           selectionColor={palette.accent}
         />
-        <Typography variant="h4">Event Type</Typography>
         <View>
+          <Typography variant="h4">Event Type</Typography>
           <Typography>types</Typography>
         </View>
         <Typography variant="h4">Date</Typography>
         <Calendar
           enableSwipeMonths
           style={{
-            borderRadius: 16,
+            borderRadius: pxGenerator(3),
             overflow: 'hidden',
             borderColor: palette.grayAccent,
             borderWidth: 1,
@@ -73,7 +74,23 @@ const CreateEvent = () => {
             },
           }}
         />
-      </View>
+        <View style={styles.flexRow}>
+          <View style={styles.timeSelect}>
+            <Typography variant="h4">Starts</Typography>
+            <View style={styles.flexRow}>
+              <View style={{flex: 3}}>
+                <TextInput style={styles.timeInput} keyboardType="numeric" />
+              </View>
+              <View style={{flex: 2}}>
+                <SwitchButton />
+              </View>
+            </View>
+          </View>
+          <View style={styles.timeSelect}>
+            <Typography variant="h4">Ends</Typography>
+          </View>
+        </View>
+      </ScrollView>
     </>
   );
 };

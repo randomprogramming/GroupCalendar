@@ -7,6 +7,25 @@ export default StyleSheet.create({
     flex: 1,
     paddingHorizontal: pxGenerator(5),
   },
+  flexRow: {
+    flexDirection: 'row',
+  },
+  timeSelect: {
+    flex: 1,
+  },
+  timeInput: {
+    textAlign: 'right',
+    backgroundColor: palette.backgroundGray,
+    borderRadius: pxGenerator(3),
+    borderColor: palette.grayAccent,
+    borderWidth: 1,
+    fontFamily: 'Poppins-Medium',
+    color: palette.white,
+    marginHorizontal: pxGenerator(4),
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    fontSize: 16,
+  },
   titleTextInput: {
     fontSize: 16,
     fontFamily: 'Poppins-Medium',
